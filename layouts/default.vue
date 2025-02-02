@@ -1,0 +1,48 @@
+<template>
+    <nav id="header" class="w-full z-30 top-0 py-1 shadow-sm">
+        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-3 py-3">
+
+            
+            <div class=" md:flex md:items-center md:w-auto w-full order-1 " id="menu">
+                <a class="flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
+                    href="/">
+
+                    Bing Wallpaper
+                </a>
+            </div>
+
+
+
+            <div class="order-2 hidden sm:flex flex items-center" id="nav-content">
+
+                <a class=" flex inline-block no-underline hover:text-black mr-4" target="_blank" href="https://apps.apple.com/us/app/daily-bing-wallpaper/id1478314524">
+                    
+                    <svg class="w-6 h-6 text-gray-800 dark:text-black mr-1" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M17.537 12.625a4.421 4.421 0 0 0 2.684 4.047 10.96 10.96 0 0 1-1.384 2.845c-.834 1.218-1.7 2.432-3.062 2.457-1.34.025-1.77-.794-3.3-.794-1.531 0-2.01.769-3.275.82-1.316.049-2.317-1.318-3.158-2.532-1.72-2.484-3.032-7.017-1.27-10.077A4.9 4.9 0 0 1 8.91 6.884c1.292-.025 2.51.869 3.3.869.789 0 2.27-1.075 3.828-.917a4.67 4.67 0 0 1 3.66 1.984 4.524 4.524 0 0 0-2.16 3.805m-2.52-7.432A4.4 4.4 0 0 0 16.06 2a4.482 4.482 0 0 0-2.945 1.516 4.185 4.185 0 0 0-1.061 3.093 3.708 3.708 0 0 0 2.967-1.416Z" />
+                    </svg>
+                    App Store
+
+                </a>
+
+                <a class="pl-3 flex inline-block no-underline hover:text-black" target="_blank" href="https://play.google.com/store/apps/details?id=com.pk.bingwallpaper">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-black mr-1" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Play Store
+
+                </a>
+
+            </div>
+        </div>
+    </nav>
+    <div class="sm:mt-4">
+        <slot></slot>
+    </div>
+</template>
