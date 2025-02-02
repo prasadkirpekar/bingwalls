@@ -10,7 +10,7 @@
         </li>
       </ul>
     </div>
-    <div v-if="isLoadingPopup">
+    <div v-if="isLoadingPopup || todayWallpaper == ''">
       <div role="status" style="height: 80vh;"
         class="flex items-center justify-center  w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
         <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@
     </div>
     <div v-else>
       <!-- Main Content with Bing Wallpaper -->
-      <img :src="getBingWallpaperUrlFromBase(todayWallpaper.url)" alt="Bing Wallpaper"
+      <img alt="Today's Bing Wallpaper" :src="getBingWallpaperUrlFromBase(todayWallpaper.url, false, false, false)"
         class="w-full h-auto sm:rounded-lg shadow-lg" />
 
       <!-- Overlay Text -->
@@ -57,7 +57,7 @@
       <div v-for="wallpaper in documents" :key="wallpaper.$id" class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
         <NuxtLink
           :to="{ name: 'wallpaper-region-date', params: { region: wallpaper.region, date: wallpaper.datestring } }">
-          <img class="hover:grow hover:shadow-lg rounded-lg" :src="getBingWallpaperUrlFromBase(wallpaper.url, false)" />
+          <img  :alt="'Bing Wallpaper from ' + formatDate(wallpaper.datestring) + ' in ' + regionToCountryMap[wallpaper.region] + ' ' + wallpaper.title" class="hover:grow hover:shadow-lg rounded-lg w-full" :src="getBingWallpaperUrlFromBase(wallpaper.url, false)" />
           <div class="pt-3 flex items-center justify-between">
             <p>{{ wallpaper.title }}</p>
           </div>
@@ -94,6 +94,8 @@
 useSeoMeta({
   title: 'Bing Wallpapers Archive',
   description: 'Collection of Bing Wallpapers from the last 10 years and multiple regions',
+  ogTitle: 'Bing Wallpapers Archive',
+  ogDescription: 'Collection of Bing Wallpapers from the last 10 years and multiple regions',
 })
 
 
@@ -130,12 +132,18 @@ const countryToRegionMap = computed(() => {
   return store.countryToRegionMap;
 });
 
+const regionToCountryMap = computed(() => {
+  return store.regionToCountryMap;
+});
+
+
 const region = computed(() => {
   return store.region;
 });
 
 const handleScroll = () => {
   if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50) {
+    
     fetchCollection();
   }
 };

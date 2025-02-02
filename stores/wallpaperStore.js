@@ -49,6 +49,7 @@ export const useWallpaperStore = defineStore('wallpaper', () => {
   const BING_URL = "https://www.bing.com";
 
   const fetchCollection = async () => {
+    if (isLoadingPopup.value || isLoading.value) return;
     try {
       isLoading.value = true;
       isLoadingPopup.value = true;
@@ -80,7 +81,6 @@ export const useWallpaperStore = defineStore('wallpaper', () => {
         isLoadingPopup.value = true;
         let query = [Query.equal('region', region), Query.equal('datestring', dateString)];
         const response = await databases.listDocuments(databaseId, collectionId, query);
-        console.log(response);
         if (response.documents.length > 0) {
             currentWallpaper.value = response.documents[0];
         }
@@ -95,18 +95,20 @@ export const useWallpaperStore = defineStore('wallpaper', () => {
   const selectRegion = (country) => {
     region.value = countryToRegionMap[country];
     lastFetchedDocumentId.value = null;
-    isLoadingPopup.value = true;
     todayWallpaper.value = '';
     documents.value = [];
     fetchCollection();
   };
 
-  const getWallpaperResolution = (isPortrait = false, isHD = false) => {
+  const getWallpaperResolution = (isPortrait = false, isHD = false, isThumbnail=true) => {
+    if (isThumbnail) {
+      return "_400x240.jpg";
+    }
     return isHD ? "_UHD.jpg" : (isPortrait ? "_1080x1920.jpg" : "_1920x1080.jpg");
   };
 
-  const getBingWallpaperUrlFromBase = (baseUrl, isPortrait = false, isHD = false) => {
-    let url = baseUrl + getWallpaperResolution(isPortrait, isHD);
+  const getBingWallpaperUrlFromBase = (baseUrl, isPortrait = false, isHD = false, isThumbnail = true) => {
+    let url = baseUrl + getWallpaperResolution(isPortrait, isHD, isThumbnail);
     return url.includes(BING_URL) ? url : BING_URL + url;
   };
 

@@ -1,7 +1,7 @@
 <template>
   <div v-if="!isLoadingPopup" class="relative w-full max-w-6xl mx-auto">
     <!-- Main Content with Bing Wallpaper -->
-    <img :src="getBingWallpaperUrlFromBase(currentWallpaper.url)" alt="Bing Wallpaper"
+    <img :src="getBingWallpaperUrlFromBase(currentWallpaper.url, false, false, false)" alt="Bing Wallpaper"
       class="w-full h-auto rounded-lg shadow-lg" />
 
     <!-- Overlay Text -->

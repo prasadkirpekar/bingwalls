@@ -5,9 +5,13 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     "@pinia/nuxt",
     "@nuxtjs/google-fonts",
-    "nuxt-gtag"
+    "nuxt-gtag",
+    "@nuxtjs/sitemap"
   ],
   gtag: {
     id: 'G-B9ZJ5SK8JE'
-  }
+  },
+  site: { 
+    url: 'https://bingwalls.com',
+  },
 })
